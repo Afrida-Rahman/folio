@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Afrida Rahman</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ═══════════════════════════ TOKENS ═══════════════════════════ */
+:root {
+  --navy:    #1a3a5c;
+  --navy2:   #2a527f;
+  --navy-l:  #eaf0f7;
+  --navy-m:  #cddaea;
+  --white:   #ffffff;
+  --off:     #f7f9fb;
+  --border:  #dde4ec;
+  --ink:     #1c2b3a;
+  --ink2:    #3f526a;
+  --ink3:    #6b7f96;
+  --ink4:    #a8bacb;
+  --green:   #1a6b45;
+  --green-l: #e6f5ee;
+  --amber:   #8a5e0a;
+  --amber-l: #fdf3e3;
+}
+
+/* ═══════════════════════════ RESET ═══════════════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:16px; }
+body { font-family:'Inter', sans-serif; font-weight:400; color:var(--ink); background:var(--white); line-height:1.65; -webkit-font-smoothing:antialiased; }
+a { color:var(--navy); text-decoration:none; }
+a:hover { text-decoration:underline; }
+
+/* ═══════════════════════════ CONTAINER ═══════════════════════════
+   Single shared container — consistent width + padding everywhere */
+.container {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* ═══════════════════════════ NAV ═══════════════════════════ */
+nav {
+  position: sticky; top: 0; z-index: 200;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  height: 58px;
+}
+.nav-inner {
+  max-width: 1180px; margin: 0 auto; padding: 0 48px;
+  height: 58px; display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo {
+  font-family: 'Lora', serif; font-size: 1.05rem; font-weight: 700;
+  color: var(--navy); letter-spacing: 0.01em; white-space: nowrap;
+}
+.nav-links { display: flex; align-items: center; gap: 0; }
+.nav-links a {
+  font-size: 0.78rem; font-weight: 500; color: var(--ink3);
+  padding: 0 1rem; height: 58px; display: flex; align-items: center;
+  letter-spacing: 0.02em; transition: color 0.15s; white-space: nowrap;
+}
+.nav-links a:hover, .nav-links a.act { color: var(--navy); text-decoration: none; }
+.nav-cta {
+  margin-left: 1rem; padding: 6px 16px;
+  font-size: 0.76rem; font-weight: 600;
+  border: 1.5px solid var(--navy); border-radius: 3px;
+  color: var(--navy); transition: all 0.18s; white-space: nowrap;
+}
+.nav-cta:hover { background: var(--navy); color: #fff; text-decoration: none; }
+.burger { display: none; border: none; background: none; cursor: pointer; flex-direction: column; gap: 5px; padding: 4px; }
+.burger span { display: block; width: 21px; height: 1.5px; background: var(--ink3); }
+
+/* ═══════════════════════════ HERO ═══════════════════════════ */
+#hero {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 60px 0 52px;
+}
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  gap: 52px;
+  align-items: start;
+}
+
+/* Photo column */
+.photo-col { order: 2; }
+.hero-info { order: 1; }
+.photo-frame {
+  width: 188px; height: 228px;
+  border-radius: 6px; overflow: hidden;
+  border: 3px solid var(--navy);
+  box-shadow: 0 6px 20px rgba(26,58,92,0.16), 0 1px 0 rgba(26,58,92,0.06);
+  background: var(--off);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 8px;
+}
+.photo-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center 18%; display: block; }
+.photo-hint { font-size: 0.67rem; color: var(--ink4); font-family: 'IBM Plex Mono', monospace; text-align: center; line-height: 1.6; }
+
+/* Profile "at a glance" card — fills the photo column */
+.profile-card {
+  margin-top: 18px;
+  border: 1px solid var(--border); border-radius: 6px;
+  background: var(--off); overflow: hidden;
+}
+.pc-head {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--navy); background: var(--navy-l);
+  padding: 7px 12px; border-bottom: 1px solid var(--border);
+}
+.pc-row { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+.pc-row:last-child { border-bottom: none; }
+.pc-k { display: block; font-size: 0.6rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink4); margin-bottom: 1px; }
+.pc-v { display: block; font-size: 0.78rem; font-weight: 500; color: var(--ink); line-height: 1.45; }
+.pc-v a { color: var(--navy); font-weight: 600; }
+
+.links-col { display: flex; flex-wrap: nowrap; gap: 9px 12px; margin-top: 16px; }
+.slink {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.74rem; font-weight: 500; color: var(--navy2);
+  transition: color 0.15s;
+}
+.slink:hover { color: var(--navy); text-decoration: none; }
+.slink svg { flex-shrink: 0; opacity: 0.75; }
+
+/* Info column */
+.hero-info {}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 0.71rem; font-weight: 600; color: var(--green);
+  background: var(--green-l); border: 1px solid rgba(26,107,69,0.22);
+  border-radius: 2px; padding: 3px 11px; margin-bottom: 1rem; letter-spacing: 0.03em;
+}
+.hero-badge::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--green); animation: blink 2s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.hero-name {
+  font-family: 'Lora', serif;
+  font-size: clamp(2.2rem, 3.5vw, 3.1rem);
+  font-weight: 700; color: var(--navy);
+  line-height: 1.08; margin-bottom: 0.4rem;
+}
+.hero-role  { font-size: 1rem; font-weight: 500; color: var(--ink2); margin-bottom: 0.2rem; }
+.hero-affil { font-size: 0.87rem; color: var(--ink3); margin-bottom: 1.6rem; }
+.hero-affil a { color: var(--navy); font-weight: 500; }
+
+/* Bio */
+.hero-bio {}
+.bio-lead {
+  max-width: 720px;
+  font-size: 0.95rem; font-style: italic;
+  color: var(--ink); line-height: 1.85;
+  border-left: 3px solid var(--navy);
+  padding-left: 1rem; margin-bottom: 1.1rem;
+}
+.bio-p {
+  font-size: 0.89rem; color: var(--ink2);
+  line-height: 1.85; margin-bottom: 0.85rem; max-width: 720px;
+}
+.bio-p:last-of-type { margin-bottom: 1.2rem; }
+.bio-p strong { color: var(--ink); font-weight: 600; }
+.bio-p a { color: var(--navy); font-weight: 600; border-bottom: 1px dotted var(--navy); }
+.bio-p a:hover { text-decoration: none; opacity: 0.75; }
+
+/* 4-capability grid */
+.cap-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 8px; margin-bottom: 1.5rem;
+}
+.cap-card {
+  background: var(--off);
+  border-left: 3px solid var(--navy);
+  border-radius: 0 3px 3px 0;
+  padding: 0.8rem 1rem;
+}
+.cap-title { font-size: 0.82rem; font-weight: 600; color: var(--navy); margin-bottom: 0.25rem; }
+.cap-desc  { font-size: 0.77rem; color: var(--ink3); line-height: 1.55; }
+
+/* Stats + CTAs in one row */
+.hero-stats-row {
+  display: flex; align-items: center; flex-wrap: wrap;
+  gap: 1rem; margin-bottom: 1.4rem;
+}
+.hero-stats {
+  display: flex; gap: 0;
+  border: 1px solid var(--border); border-radius: 4px;
+  overflow: hidden; width: fit-content;
+}
+.hstat {
+  padding: 0.6rem 1.4rem; border-right: 1px solid var(--border);
+  text-align: center; background: var(--white);
+}
+.hstat:last-child { border-right: none; }
+.hstat-n { font-family: 'Lora', serif; font-size: 1.55rem; font-weight: 700; color: var(--navy); line-height: 1; }
+.hstat-l { font-size: 0.66rem; color: var(--ink4); margin-top: 2px; letter-spacing: 0.03em; }
+
+/* CTA buttons */
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.79rem; font-weight: 600;
+  padding: 7px 16px; border-radius: 3px;
+  border: 1.5px solid var(--border);
+  color: var(--ink2); transition: all 0.18s;
+}
+.btn:hover { border-color: var(--navy); color: var(--navy); text-decoration: none; }
+.btn-primary { background: var(--navy); color: #fff; border-color: var(--navy); }
+.btn-primary:hover { background: var(--navy2); color: #fff; }
+
+/* ═══════════════════════════ TWO-COLUMN BODY ═══════════════════════════ */
+#body-wrap { padding: 0; }
+.body-grid {
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  gap: 0;
+  align-items: start;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+  order: 2;
+  position: sticky; top: 58px;
+  padding: 52px 0 52px 36px;
+  border-right: none;
+  border-left: 1px solid var(--border);
+  min-height: calc(100vh - 58px);
+  align-self: start;
+}
+.side-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.64rem; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--navy);
+  margin-bottom: 0.35rem;
+}
+.side-title {
+  font-family: 'Lora', serif;
+  font-size: 1.2rem; font-weight: 700;
+  color: var(--navy); margin-bottom: 1.1rem;
+}
+.news-list { display: flex; flex-direction: column; }
+.news-item {
+  display: flex; gap: 0.65rem; align-items: flex-start;
+  padding: 0.75rem 0; border-bottom: 1px solid var(--border);
+}
+.news-item:last-child { border-bottom: none; }
+.ndot {
+  width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 5px;
+}
+.nd-paper { background: var(--navy); }
+.nd-award { background: var(--amber); }
+.nd-talk  { background: var(--green); }
+.news-body {}
+.news-date { font-family: 'IBM Plex Mono', monospace; font-size: 0.64rem; color: var(--ink4); margin-bottom: 2px; }
+.news-text { font-size: 0.79rem; color: var(--ink2); line-height: 1.55; }
+.news-text strong { color: var(--ink); font-weight: 600; }
+
+/* ── Main content ── */
+.main-col {
+  order: 1;
+  padding: 52px 52px 52px 0;
+}
+.sec-block {
+  padding-bottom: 48px;
+  margin-bottom: 48px;
+  border-bottom: 1px solid var(--border);
+}
+.sec-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.sec-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.64rem; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--navy);
+  margin-bottom: 0.4rem;
+}
+.sec-title {
+  font-family: 'Lora', serif;
+  font-size: 1.45rem; font-weight: 700;
+  color: var(--navy); margin-bottom: 1.5rem;
+}
+
+/* RESEARCH GRID */
+.research-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.rcard {
+  border: 1px solid var(--border); border-radius: 5px;
+  padding: 1.25rem 1.3rem; background: var(--off);
+  transition: all 0.2s; position: relative; overflow: hidden;
+}
+.rcard::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--navy);
+}
+.rcard:hover { border-color: var(--navy-m); background: var(--white); box-shadow: 0 3px 14px rgba(26,58,92,0.07); transform: translateY(-2px); }
+.rcard-icon  { font-size: 1.4rem; margin-bottom: 0.65rem; }
+.rcard-title { font-size: 0.9rem; font-weight: 600; color: var(--navy); margin-bottom: 0.35rem; }
+.rcard-desc  { font-size: 0.8rem; color: var(--ink3); line-height: 1.7; }
+.rcard-tags  { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.75rem; }
+.rtag {
+  font-size: 0.68rem; color: var(--navy); background: var(--navy-l);
+  border: 1px solid var(--navy-m); border-radius: 2px; padding: 1px 7px;
+}
+
+/* PUBLICATIONS */
+.pub-note { font-size: 0.81rem; color: var(--ink3); font-style: italic; margin-bottom: 1rem; }
+.pub-filters { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 1.2rem; }
+.pfbtn {
+  font-size: 0.72rem; font-weight: 500;
+  padding: 4px 13px; border-radius: 2px;
+  border: 1px solid var(--border); color: var(--ink3);
+  background: var(--white); cursor: pointer; transition: all 0.16s;
+}
+.pfbtn:hover, .pfbtn.on { background: var(--navy); border-color: var(--navy); color: #fff; }
+
+.pub-list { display: flex; flex-direction: column; }
+.pub-row {
+  display: grid; grid-template-columns: 52px 1fr;
+  gap: 0 14px; padding: 1.2rem 0;
+  border-bottom: 1px solid var(--border); align-items: start;
+}
+.pub-row:last-child { border-bottom: none; }
+.pub-thumb {
+  width: 52px; height: 52px; border-radius: 4px;
+  background: var(--navy-l); border: 1px solid var(--navy-m);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; flex-shrink: 0;
+}
+.pub-meta { display: flex; gap: 5px; flex-wrap: wrap; align-items: center; margin-bottom: 0.35rem; }
+.chip {
+  font-size: 0.61rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.05em; padding: 2px 7px; border-radius: 2px;
+}
+.chip-j   { background: var(--navy-l);  color: var(--navy);  border: 1px solid var(--navy-m); }
+.chip-c   { background: var(--green-l); color: var(--green); border: 1px solid rgba(26,107,69,0.2); }
+.chip-b   { background: var(--amber-l); color: var(--amber); border: 1px solid rgba(138,94,10,0.2); }
+.chip-if  { background: var(--off);     color: var(--ink3);  border: 1px solid var(--border); }
+.chip-top { background: var(--amber-l); color: var(--amber); border: 1px solid rgba(138,94,10,0.22); }
+.pub-yr   { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--ink4); }
+.pub-title { font-size: 0.91rem; color: var(--ink); line-height: 1.55; margin-bottom: 0.22rem; }
+.pub-title strong { color: var(--navy); }
+.pub-venue { font-size: 0.8rem; color: var(--ink3); margin-bottom: 0.3rem; }
+.pub-doi   {
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.69rem;
+  color: var(--navy); display: inline-flex; align-items: center; gap: 3px;
+}
+.pub-doi:hover { text-decoration: underline; }
+
+/* PROJECTS */
+.proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.pcard {
+  border: 1px solid var(--border); border-radius: 5px;
+  overflow: hidden; background: var(--white); transition: all 0.2s;
+}
+.pcard:hover { border-color: var(--navy-m); box-shadow: 0 4px 16px rgba(26,58,92,0.08); transform: translateY(-2px); }
+.pcard-hd {
+  padding: 0.9rem 1.2rem;
+  display: flex; align-items: flex-start; gap: 0.75rem;
+  background: var(--navy); color: #fff;
+}
+.pcard-hd.g  { background: #1a5c3a; }
+.pcard-hd.sl { background: #2c4a68; }
+.pcard-hd.tl { background: #1a576b; }
+.pcard-hd.am { background: #7a4e00; }
+.pcard-ico { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+.pcard-yr  { font-family: 'IBM Plex Mono', monospace; font-size: 0.63rem; color: rgba(255,255,255,0.5); margin-bottom: 2px; }
+.pcard-nm  { font-size: 0.87rem; font-weight: 600; color: #fff; line-height: 1.3; }
+.pcard-bd  { padding: 0.9rem 1.2rem; }
+.pcard-txt { font-size: 0.81rem; color: var(--ink2); line-height: 1.75; }
+.pcard-ft  {
+  padding: 0.6rem 1.2rem;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.pcard-st {
+  font-size: 0.69rem; font-weight: 600; color: var(--green);
+  display: flex; align-items: center; gap: 5px;
+}
+.pcard-st::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+.pcard-lk { font-family: 'IBM Plex Mono', monospace; font-size: 0.69rem; color: var(--navy); }
+.pcard-lk:hover { text-decoration: underline; }
+
+/* MORE PROJECTS (compact secondary list) */
+.more-label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.64rem;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink4);
+  margin: 1.8rem 0 0.9rem;
+}
+.mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+.mini-card {
+  display: flex; gap: 0.7rem; align-items: flex-start;
+  border: 1px solid var(--border); border-radius: 5px;
+  padding: 0.8rem 0.95rem; background: var(--white); transition: all 0.18s;
+}
+.mini-card:hover { border-color: var(--navy-m); box-shadow: 0 3px 12px rgba(26,58,92,0.07); }
+.mini-ico { font-size: 1.05rem; line-height: 1.4; flex-shrink: 0; }
+.mini-body { flex: 1; min-width: 0; }
+.mini-top { display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; }
+.mini-nm { font-size: 0.82rem; font-weight: 600; color: var(--navy); }
+.mini-yr { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; color: var(--ink4); flex-shrink: 0; }
+.mini-desc { font-size: 0.75rem; color: var(--ink3); line-height: 1.55; margin: 2px 0 5px; }
+.mini-lk { font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; color: var(--navy); }
+.mini-lk:hover { text-decoration: underline; }
+
+/* SKILLS */
+.skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 1.4rem; margin-bottom: 1.6rem; }
+.skill-card {
+  border: 1px solid var(--border); border-radius: 5px;
+  padding: 1rem 1.15rem; background: var(--off);
+  border-left: 3px solid var(--navy);
+}
+.skill-card-title {
+  font-size: 0.82rem; font-weight: 700; color: var(--navy);
+  margin-bottom: 0.55rem; display: flex; align-items: center; gap: 6px;
+}
+.skill-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.skill-pill {
+  font-size: 0.77rem; font-weight: 500; color: var(--ink2);
+  background: var(--white); border: 1px solid var(--navy-m); border-radius: 12px;
+  padding: 3px 11px;
+}
+
+.tools-block { padding-top: 1.4rem; border-top: 1px solid var(--border); }
+.tools-label {
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.64rem;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink4); margin-bottom: 0.7rem;
+}
+.tool-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.ttag { font-size: 0.76rem; color: var(--ink2); background: var(--off); border: 1px solid var(--border); border-radius: 3px; padding: 4px 11px; }
+
+/* BACKGROUND (academic + professional combined timeline) */
+.bg-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2.8rem; }
+.bg-col-title {
+  font-size: 0.8rem; font-weight: 700; color: var(--navy);
+  text-transform: uppercase; letter-spacing: 0.07em;
+  margin-bottom: 1.4rem; padding-bottom: 0.7rem; border-bottom: 2px solid var(--navy);
+  display: flex; align-items: center; gap: 8px;
+}
+.bg-col-title .bg-ico { font-size: 1rem; }
+
+.bg-timeline { position: relative; padding-left: 22px; }
+.bg-timeline::before {
+  content: ''; position: absolute; left: 5px; top: 6px; bottom: 6px;
+  width: 1.5px; background: var(--navy-m);
+}
+.bg-item { position: relative; padding: 0 0 1.6rem 0; }
+.bg-item:last-child { padding-bottom: 0; }
+.bg-item::before {
+  content: ''; position: absolute; left: -22px; top: 4px;
+  width: 11px; height: 11px; border-radius: 50%;
+  background: var(--white); border: 2.5px solid var(--navy);
+}
+.bg-period {
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; font-weight: 500;
+  color: var(--navy); letter-spacing: 0.03em; margin-bottom: 4px;
+}
+.bg-role { font-family: 'Lora', serif; font-size: 0.97rem; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+.bg-org { font-size: 0.81rem; font-weight: 600; color: var(--navy2); margin-bottom: 5px; }
+.bg-desc { font-size: 0.8rem; color: var(--ink3); line-height: 1.7; }
+.bg-result { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--green); font-weight: 500; margin-top: 4px; }
+
+/* Scholarship callout (amber-accented award block) */
+.scholar-item::before { border-color: var(--amber) !important; }
+.scholar-card {
+  background: var(--amber-l); border: 1px solid rgba(138,94,10,0.2);
+  border-left: 3px solid var(--amber); border-radius: 0 5px 5px 0;
+  padding: 0.8rem 1rem; margin-top: 0.3rem;
+}
+.scholar-card .bg-role { color: var(--amber); }
+.scholar-levels { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.6rem; }
+.scholar-chip {
+  font-size: 0.68rem; font-weight: 600; color: var(--amber);
+  background: var(--white); border: 1px solid rgba(138,94,10,0.25);
+  border-radius: 12px; padding: 2px 10px;
+}
+
+/* EXTRA-CURRICULAR */
+.activity-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.act-card { border: 1px solid var(--border); border-radius: 5px; padding: 1.1rem 1.25rem; background: var(--off); }
+.act-org { font-size: 0.87rem; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+.act-role { font-size: 0.78rem; font-weight: 600; color: var(--ink2); margin-bottom: 2px; }
+.act-period { font-family: 'IBM Plex Mono', monospace; font-size: 0.67rem; color: var(--ink4); margin-bottom: 0.5rem; }
+.act-desc { font-size: 0.79rem; color: var(--ink3); line-height: 1.6; }
+
+/* ACHIEVEMENTS & CERTIFICATIONS */
+.ach-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2.2rem; }
+.ach-list { display: flex; flex-direction: column; gap: 0; }
+.ach-row { display: flex; gap: 0.7rem; align-items: flex-start; padding: 0.7rem 0; border-bottom: 1px solid var(--border); }
+.ach-row:last-child { border-bottom: none; }
+.ach-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); flex-shrink: 0; margin-top: 7px; }
+.ach-text { font-size: 0.83rem; color: var(--ink2); line-height: 1.6; }
+.ach-text strong { color: var(--ink); }
+
+/* REFERENCES */
+.ref-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+.ref-card { border: 1px solid var(--border); border-radius: 5px; padding: 1.1rem 1.25rem; background: var(--off); border-top: 3px solid var(--navy); }
+.ref-name { font-size: 0.88rem; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+.ref-role { font-size: 0.78rem; color: var(--navy); font-weight: 500; margin-bottom: 6px; line-height: 1.5; }
+.ref-org { font-size: 0.77rem; color: var(--ink3); line-height: 1.6; margin-bottom: 6px; }
+.ref-contact { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--navy); display: block; }
+.ref-contact:hover { text-decoration: underline; }
+
+
+#contact {
+  background: var(--navy); padding: 64px 0;
+}
+.contact-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+}
+.ct-heading { font-family: 'Lora', serif; font-size: 1.8rem; font-weight: 700; color: #fff; margin-bottom: 0.75rem; }
+.ct-sub     { font-size: 0.88rem; color: rgba(255,255,255,0.5); line-height: 1.8; margin-bottom: 1.5rem; }
+.ct-email   {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 4px; padding: 10px 18px;
+  font-size: 0.88rem; font-weight: 500; color: #fff; transition: all 0.2s;
+}
+.ct-email:hover { background: rgba(255,255,255,0.15); text-decoration: none; }
+.ct-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.ct-row  { display: flex; align-items: baseline; gap: 1rem; }
+.ct-lbl  { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: rgba(255,255,255,0.35); flex-shrink: 0; width: 88px; letter-spacing: 0.04em; }
+.ct-val  { font-size: 0.85rem; color: rgba(255,255,255,0.8); }
+.ct-val a { color: rgba(255,255,255,0.8); }
+.ct-val a:hover { color: #fff; text-decoration: underline; }
+
+/* ═══════════════════════════ FOOTER ═══════════════════════════ */
+footer {
+  background: #0f1a27; border-top: 1px solid rgba(255,255,255,0.06);
+  text-align: center; padding: 1.2rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem; color: rgba(255,255,255,0.22); letter-spacing: 0.05em;
+}
+
+/* ═══════════════════════════ REVEAL ═══════════════════════════ */
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+/* ═══════════════════════════ RESPONSIVE ═══════════════════════════ */
+@media (max-width: 1024px) {
+  .container, .nav-inner { padding: 0 32px; }
+  .hero-inner { gap: 36px; }
+  .body-grid { grid-template-columns: 1fr 210px; }
+  .sidebar { padding-left: 28px; }
+  .main-col { padding-right: 36px; }
+}
+@media (max-width: 860px) {
+  .body-grid { grid-template-columns: 1fr; }
+  .sidebar {
+    order: 2;
+    position: static; min-height: unset;
+    border-left: none; border-bottom: 1px solid var(--border);
+    padding: 36px 0; display: grid;
+    grid-template-columns: 1fr 1fr; gap: 0 2rem;
+  }
+  .side-label, .side-title { grid-column: 1 / -1; }
+  .news-list { grid-column: 1 / -1; }
+  .main-col { order: 1; padding: 36px 0 0; }
+}
+@media (max-width: 720px) {
+  .container, .nav-inner { padding: 0 20px; }
+  .nav-links { display: none; position: absolute; top: 58px; left: 0; right: 0; flex-direction: column; background: var(--white); border-bottom: 1px solid var(--border); padding: 0.5rem 0; z-index: 99; }
+  .nav-links.open { display: flex; }
+  .nav-links a { height: 42px; padding: 0 20px; border-bottom: 1px solid var(--border); }
+  .nav-cta { display: none; }
+  .burger { display: flex; }
+  #hero { padding: 36px 0; }
+  .hero-inner { grid-template-columns: 1fr; gap: 24px; }
+  .photo-frame { width: 140px; height: 170px; margin: 0 auto; }
+  .photo-col { display: flex; flex-direction: column; align-items: center; }
+  .research-grid, .proj-grid, .mini-grid { grid-template-columns: 1fr; }
+  .cap-grid { grid-template-columns: 1fr; }
+  .skills-grid, .bg-cols, .activity-grid, .ach-cols, .ref-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+}
+@media (max-width: 480px) {
+  .hero-stats { flex-wrap: wrap; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ NAV ══════════ -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#hero">Afrida Rahman</a>
+    <div class="nav-links" id="navLinks">
+      <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#background">Background</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="nav-cta" href="mailto:nyp9tp@virginia.edu">Email Me</a>
+    <button class="burger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+
+      <!-- Photo + social -->
+      <div class="photo-col">
+        <div class="photo-frame">
+          <img src="me.jpeg" alt="Afrida Rahman">
+        </div>
+
+        <div class="profile-card">
+          <div class="pc-head">At a Glance</div>
+          <div class="pc-row"><span class="pc-k">Role</span><span class="pc-v">Research Assistant</span></div>
+          <div class="pc-row"><span class="pc-k">Focus</span><span class="pc-v">AI · Medical Imaging · Computational Biology</span></div>
+          <div class="pc-row"><span class="pc-k">Education</span><span class="pc-v">B.Sc. in CSE</span></div>
+          <div class="pc-row"><span class="pc-k">Based in</span><span class="pc-v">Charlottesville, Virginia</span></div>
+          <div class="pc-row"><span class="pc-k">Status</span><span class="pc-v">Open to PhD positions</span></div>
+        </div>
+
+        <div class="links-col">
+          <a class="slink" href="https://scholar.google.com/citations?user=PLN8BW8AAAAJ&hl=en" target="_blank">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-8 10 8H2z"/><path d="M6 10v8a6 6 0 0 0 12 0v-8"/></svg>Scholar
+          </a>
+          <a class="slink" href="https://github.com/Afrida-Rahman" target="_blank">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>GitHub
+          </a>
+          <a class="slink" href="https://www.linkedin.com/in/afridarahman/" target="_blank">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7H10v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn
+          </a>
+        </div>
+      </div>
+
+      <!-- Bio -->
+      <div class="hero-info">
+        <div class="hero-badge">Open to PhD Applications</div>
+        <h1 class="hero-name">Afrida Rahman</h1>
+        <p class="hero-role">Research Assistant · AI &amp; Medical Imaging</p>
+        <p class="hero-affil">
+          <a href="https://med.virginia.edu/radiology-research/bijoy-kundu/" target="_blank">Kundu Lab</a>,
+          Dept. of Radiology &amp; Medical Imaging, University of Virginia, USA
+        </p>
+
+        <div class="hero-bio">
+          <p class="bio-lead">Hi, I am a machine learning researcher working at the intersection of artificial intelligence and human health. My conviction is a simple one: that learning systems can read the signatures of disease — in a protein sequence, in a tissue, in a scan, with a precision the unaided eye cannot reach, and this precision can reshape how disease is diagnosed and treated.</p>
+
+          <p class="bio-p">At the <strong>University of Virginia</strong>, I work under the supervision of <strong><a href="https://med.virginia.edu/radiology-research/bijoy-kundu/" target="_blank">Dr. Bijoy Kundu</a></strong>, designing multimodal deep learning systems that integrate parametric FDG-PET with structural MRI to distinguish true tumor progression from treatment-induced necrosis in glioblastoma, a distinction that directly governs clinical decision-making in post-treatment neuro-oncology. A part of this work has been published in the <em>Journal of Nuclear Medicine</em>.</p>
+
+          <p class="bio-p">My research foundations were built over four years at the <strong>Machine Learning Research Lab,</strong> Bangladesh, where I developed sequence-based predictors for <strong>protein post-translational modification (PTM) site identification</strong>, a range of work published across <em>Nature Scientific Reports</em>, <em>PLOS ONE</em>, <em>Gene</em>, and <em>IEEE/ACM Transactions on Computational Biology and Bioinformatics</em>.</p>
+
+          <p class="bio-p">In a distinct line of applied work, I served as an <strong>AI Engineer at MyMedicalHUB,</strong> FL, USA where I brought deep learning to clinical-scale production — engineering real-time pose estimation and body-part segmentation to track over 600 musculoskeletal rehabilitation exercises on Android. Across these domains, my aim remains constant: to build models that are not only accurate, but trustworthy enough to inform real clinical decisions.</p>
+
+        <div class="hero-stats-row">
+          <div class="hero-stats">
+            <div class="hstat"><div class="hstat-n">7</div><div class="hstat-l">Publications</div></div>
+            <div class="hstat"><div class="hstat-n">4</div><div class="hstat-l">Q1 Journals</div></div>
+            <div class="hstat"><div class="hstat-n">54+</div><div class="hstat-l">Citations</div></div>
+            <div class="hstat"><div class="hstat-n">4</div><div class="hstat-l">h-index</div></div>
+            <div class="hstat"><div class="hstat-n">5+</div><div class="hstat-l">Yrs Research</div></div>
+          </div>
+          <div class="hero-ctas">
+            <a class="btn btn-primary" href="mailto:nyp9tp@virginia.edu">✉ Get in Touch</a>
+            <a class="btn" href="#publications">View Publications</a>
+            <a class="btn" href="https://scholar.google.com/citations?user=PLN8BW8AAAAJ&hl=en" target="_blank">Google Scholar ↗</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ TWO-COLUMN BODY ══════════ -->
+<div id="body-wrap">
+  <div class="container">
+    <div class="body-grid">
+
+      <!-- LEFT: NEWS SIDEBAR -->
+      <aside class="sidebar">
+        <p class="side-label">Latest</p>
+        <h2 class="side-title">News</h2>
+        <div class="news-list">
+          <div class="news-item">
+            <div class="ndot nd-paper"></div>
+            <div class="news-body">
+              <div class="news-date">Jan 2026</div>
+              <div class="news-text"><strong>Published in JNM</strong> (SNMMI 2026) — Parametric FDG Brain PET for Multimodal CNN to Differentiate Tumor Progression from Treatment Effect in GBM.</div>
+            </div>
+          </div>
+          <div class="news-item">
+            <div class="ndot nd-award"></div>
+            <div class="news-body">
+              <div class="news-date">Oct 2025</div>
+              <div class="news-text"><strong>Student Travel Award</strong>, WMIC 2025, Alaska — selected among top 8 abstracts.</div>
+            </div>
+          </div>
+          <div class="news-item">
+            <div class="ndot nd-talk"></div>
+            <div class="news-body">
+              <div class="news-date">Sep 2025</div>
+              <div class="news-text">Poster at <strong>UVA Clinical AI Research Symposium</strong> on multimodal brain tumor segmentation.</div>
+            </div>
+          </div>
+          <div class="news-item">
+            <div class="ndot nd-paper"></div>
+            <div class="news-body">
+              <div class="news-date">Jul 2025</div>
+              <div class="news-text">Book chapter published in <strong>Elsevier Advances in Cancer Research</strong>.</div>
+            </div>
+          </div>
+          <div class="news-item">
+            <div class="ndot nd-talk"></div>
+            <div class="news-body">
+              <div class="news-date">Apr 2025</div>
+              <div class="news-text">Poster at <strong>UVA Research Computing Exhibition</strong> on deep learning for brain tumor segmentation.</div>
+            </div>
+          </div>
+          <div class="news-item">
+            <div class="ndot nd-paper"></div>
+            <div class="news-body">
+              <div class="news-date">Dec 2024</div>
+              <div class="news-text">Joined <strong>Kundu Lab, University of Virginia</strong> as Research Assistant.</div>
+            </div>
+          </div>
+          <div class="news-item">
+            <div class="ndot nd-award"></div>
+            <div class="news-body">
+              <div class="news-date">Sep 2022</div>
+              <div class="news-text"><strong>Best Employee Award</strong>, MyMedicalHUB — for developing a 600+ exercise real-time tracking algorithm.</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- RIGHT: MAIN CONTENT -->
+      <main class="main-col">
+
+        <!-- RESEARCH -->
+        <div class="sec-block reveal" id="research">
+          <p class="sec-eyebrow">What I Work On</p>
+          <h2 class="sec-title">Research Areas</h2>
+          <div class="research-grid">
+            <div class="rcard">
+              <div class="rcard-icon">🧠</div>
+              <div class="rcard-title">Medical Imaging &amp; Neuro-Oncology AI</div>
+              <div class="rcard-desc">Deep learning for brain tumor segmentation and post-treatment classification using PET/MRI fusion. Focused on glioblastoma — differentiating true progression from treatment necrosis.</div>
+              <div class="rcard-tags"><span class="rtag">PET/MRI Fusion</span><span class="rtag">Segmentation</span><span class="rtag">GBM</span><span class="rtag">BraTS</span></div>
+            </div>
+            <div class="rcard">
+              <div class="rcard-icon">🔬</div>
+              <div class="rcard-title">Protein Bioinformatics</div>
+              <div class="rcard-desc">Sequence-based machine learning to computationally identify post-translational modification sites in proteins, enabling faster proteomics discovery without expensive wet-lab experiments.</div>
+              <div class="rcard-tags"><span class="rtag">PTM Prediction</span><span class="rtag">Sequence ML</span><span class="rtag">PseAAC</span><span class="rtag">Class Imbalance</span></div>
+            </div>
+            <div class="rcard">
+              <div class="rcard-icon">👁</div>
+              <div class="rcard-title">Computer Vision in Healthcare</div>
+              <div class="rcard-desc">Deployed real-time pose estimation, gesture recognition, and body-part segmentation systems in clinical and consumer settings, including a production Android physiotherapy application.</div>
+              <div class="rcard-tags"><span class="rtag">Pose Estimation</span><span class="rtag">Gesture Detection</span><span class="rtag">Mobile AI</span></div>
+            </div>
+            <div class="rcard">
+              <div class="rcard-icon">⚙️</div>
+              <div class="rcard-title">Deep Learning Architecture Design</div>
+              <div class="rcard-desc">VAE-based residual networks, hybrid loss functions, and ensemble strategies tailored for medical domains — where data is scarce, class imbalance is severe, and precision is non-negotiable.</div>
+              <div class="rcard-tags"><span class="rtag">VAE</span><span class="rtag">Transfer Learning</span><span class="rtag">Hybrid Loss</span><span class="rtag">Ensemble</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PUBLICATIONS -->
+        <div class="sec-block reveal" id="publications">
+          <p class="sec-eyebrow">Research Output</p>
+          <h2 class="sec-title">Publications</h2>
+          <p class="pub-note">* denotes co-first authorship. Author's name is bolded in each entry.</p>
+          <div class="pub-filters">
+            <button class="pfbtn on" onclick="filterPubs('all',this)">All (8)</button>
+            <button class="pfbtn" onclick="filterPubs('journal',this)">Journals (4)</button>
+            <button class="pfbtn" onclick="filterPubs('conference',this)">Conference (3)</button>
+            <button class="pfbtn" onclick="filterPubs('book',this)">Book (1)</button>
+          </div>
+          <div class="pub-list" id="pubList">
+
+            <div class="pub-row" data-type="conference">
+              <div class="pub-thumb">📄</div>
+              <div class="pub-body">
+                <div class="pub-meta"><span class="chip chip-c">Conference</span><span class="pub-yr">2026</span></div>
+                <div class="pub-title"><strong>Rahman, A.</strong>, Kundu, B. "Parametric FDG Brain PET for Multimodal Convolution Neural Network to Differentiate Tumor Progression from Treatment Effect in Glioblastoma."</div>
+                <div class="pub-venue">Published in the Journal of Nuclear Medicine — SNMMI 2026 Annual Meeting. </div>
+                <a class="pub-doi" href="https://jnm.snmjournals.org/content/67/supplement_1/262044.abstract" target="_blank">[View Abstract]</a>
+              </div>
+            </div>
+
+            <div class="pub-row" data-type="conference">
+              <div class="pub-thumb">🏆</div>
+              <div class="pub-body">
+                <div class="pub-meta"><span class="chip chip-c">Conference</span><span class="pub-yr">2025</span><span class="chip chip-top">Top 8 Abstract · Travel Award</span></div>
+                <div class="pub-title"><strong>Rahman, A.</strong>, Kundu, B. "Variational Autoencoder-Based Residual Network for Multimodal Brain Tumor Segmentation with Hybrid Loss Optimization."</div>
+                <div class="pub-venue"><em>World Molecular Imaging Congress (WMIC 2025)</em>, Alaska</div>
+              </div>
+            </div>
+
+            <div class="pub-row" data-type="book">
+              <div class="pub-thumb">📖</div>
+              <div class="pub-body">
+                <div class="pub-meta"><span class="chip chip-b">Book Chapter</span><span class="pub-yr">2025</span></div>
+                <div class="pub-title">Kundu, B., Qureshi, Z., Chavan, R., <strong>Rahman, A.</strong> "AI-driven parametric FDG brain PET and brain tumor segmentation for multi-modal CNN to differentiate tumor progression from treatment effect in GBM."</div>
+                <div class="pub-venue"><em>Advances in Cancer Research</em>, Elsevier, 2025</div>
+                <a class="pub-doi" href="https://doi.org/10.1016/bs.acr.2025.07.001" target="_blank">[DOI]</a>
+              </div>
+            </div>
+
+            <div class="pub-row" data-type="journal">
+              <div class="pub-thumb">📄</div>
+              <div class="pub-body">
+                <div class="pub-meta"><span class="chip chip-j">Journal · Q1</span><span class="pub-yr">2022</span><span class="chip chip-if">IF 3.822</span></div>
+                <div class="pub-title"><strong>Rahman, A.</strong>, Ahmed, S., Hasan, M. A., Ahmad, S., &amp; Dehzangi, A. "Accurately Predicting Nitrosylated Tyrosine Sites Using Probabilistic Sequence Information."</div>
+                <div class="pub-venue"><em>Gene</em></div>
+                <a class="pub-doi" href="https://doi.org/10.1016/j.gene.2022.146445" target="_blank">[DOI]</a>
+              </div>
+            </div>
+
+            <div class="pub-row" data-type="journal">
+              <div class="pub-thumb">📄</div>
+              <div class="pub-body">
+                <div class="pub-meta"><span class="chip chip-j">Journal · Q1</span><span class="pub-yr">2021</span><span class="chip chip-if">IF 5.133</span></div>
+                <div class="pub-title">Ahmed, S., <strong>Rahman, A.</strong>, Hasan, M. A., Ahmad, S., &amp; Shovan, S. M. "Computational identification of multiple lysine PTM sites by analysing the instance hardness and feature importance."</div>
+                <div class="pub-venue"><em>Scientific Reports</em> (Nature)</div>
+                <a class="pub-doi" href="https://doi.org/10.1038/s41598-021-98458-y" target="_blank">[DOI]</a>
+              </div>
+            </div>
+
+            <div class="pub-row" data-type="journal">
+              <div class="pub-thumb">📄</div>
+              <div class="pub-body">
+                <div class="pub-meta"><span class="chip chip-j">Journal · Q1</span><span class="pub-yr">2021</span><span class="chip chip-if">IF 3.24</span></div>
+                <div class="pub-title">Ahmed, S., <strong>Rahman, A.*</strong>, Hasan, M. A. et al. "predPhogly-Site: Predicting Phosphoglycerylation Sites by Incorporating Probabilistic Sequence-Coupling Information into PseAAC." <span style="font-size:0.75rem;color:var(--ink4);">(*Co-first author)</span></div>
+                <div class="pub-venue"><em>PLOS ONE</em></div>
+                <a class="pub-doi" href="https://doi.org/10.1371/journal.pone.0249396" target="_blank">[DOI]</a>
+              </div>
+            </div>
+
+            <div class="pub-row" data-type="journal">
+              <div class="pub-thumb">📄</div>
+              <div class="pub-body">
+                <div class="pub-meta"><span class="chip chip-j">Journal · Q1</span><span class="pub-yr">2021</span><span class="chip chip-if">IF 3.71</span></div>
+                <div class="pub-title">Ahmed, S., <strong>Rahman, A.</strong>, Hasan, M. A. et al. "predML-Site: Predicting Multiple Lysine PTM Sites with Optimal Feature Representation and Data Imbalance Minimization."</div>
+                <div class="pub-venue"><em>IEEE/ACM Transactions on Computational Biology and Bioinformatics</em></div>
+                <a class="pub-doi" href="https://ieeexplore.ieee.org/document/9543574" target="_blank">[DOI]</a>
+              </div>
+            </div>
+
+            <div class="pub-row" data-type="conference">
+              <div class="pub-thumb">🎤</div>
+              <div class="pub-body">
+                <div class="pub-meta"><span class="chip chip-c">Conference</span><span class="pub-yr">2020</span></div>
+                <div class="pub-title"><strong>Rahman, A.</strong>, Ahmed, S., Rahman, J., &amp; Hasan, M. A. "Prediction of Formylation Sites by Incorporating Sequence Coupling into General PseAAC."</div>
+                <div class="pub-venue"><em>IEEE Region 10 Symposium (TENSYMP 2020)</em>, Dhaka, Bangladesh</div>
+                <a class="pub-doi" href="https://ieeexplore.ieee.org/document/9230745" target="_blank">[DOI]</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- PROJECTS -->
+        <div class="sec-block reveal" id="projects">
+          <p class="sec-eyebrow">What I've Built</p>
+          <h2 class="sec-title">Projects</h2>
+          <div class="proj-grid">
+            <div class="pcard">
+              <div class="pcard-hd"><div class="pcard-ico">🧠</div><div><div class="pcard-yr">Published in JNM · SNMMI 2026</div><div class="pcard-nm">Parametric FDG Brain PET for Tumor Progression</div></div></div>
+              <div class="pcard-bd"><div class="pcard-txt">Integrating dynamic PET kinetics with structural MRI to classify post-treatment GBM. Combines parametric imaging, blood input function analysis, and multimodal CNN — published in the Journal of Nuclear Medicine.</div></div>
+              <div class="pcard-ft"><span class="pcard-st">Published</span><a class="pcard-lk" href="https://jnm.snmjournals.org/content/67/supplement_1/262044.abstract" target="_blank">View Abstract ↗</a></div>
+            </div>
+            <div class="pcard">
+              <div class="pcard-hd tl"><div class="pcard-ico">🔬</div><div><div class="pcard-yr">2019 – 2023</div><div class="pcard-nm">Protein PTM Prediction Suite</div></div></div>
+              <div class="pcard-bd"><div class="pcard-txt">Six computational predictors for protein PTM sites — multi-label models for 5 simultaneous modification types using BERT, Word2Vec, and GloVe. Resulted in 4 Q1 publications in Nature, PLOS ONE, and IEEE/ACM TCBB.</div></div>
+              <div class="pcard-ft"><span class="pcard-st">Published</span><a class="pcard-lk" href="https://www.researchgate.net/project/Post-translational-Modifications" target="_blank">ResearchGate ↗</a></div>
+            </div>
+            <div class="pcard">
+              <div class="pcard-hd sl"><div class="pcard-ico">🩺</div><div><div class="pcard-yr">Dec 2024 – Sep 2025</div><div class="pcard-nm">Post-Treatment Tumor Segmentation</div></div></div>
+              <div class="pcard-bd"><div class="pcard-txt">Multiclass segmentation on the post-treated BraTS dataset. VAE-based residual network with hybrid loss. Presented at UVA Research Computing Exhibition and UVA Clinical AI Research Symposium.</div></div>
+              <div class="pcard-ft"><span class="pcard-st">Completed</span></div>
+            </div>
+            <div class="pcard">
+              <div class="pcard-hd g"><div class="pcard-ico">💪</div><div><div class="pcard-yr">2021 – 2023</div><div class="pcard-nm">EMMA Health — AI Physiotherapy Coach</div></div></div>
+              <div class="pcard-bd"><div class="pcard-txt">Production Android deployment of real-time pose estimation, gesture detection, and body-part segmentation — simultaneously tracking 600+ musculoskeletal exercises. Won Best Employee and Best Team awards.</div></div>
+              <div class="pcard-ft"><span class="pcard-st">Deployed</span><a class="pcard-lk" href="https://play.google.com/store/apps/details?id=com.mmh.emmahealth" target="_blank">Play Store ↗</a></div>
+            </div>
+          </div>
+
+          <p class="more-label">Selected Earlier Work</p>
+          <div class="mini-grid">
+            <div class="mini-card">
+              <div class="mini-ico">🧬</div>
+              <div class="mini-body">
+                <div class="mini-top"><span class="mini-nm">DeepR5hmC</span><span class="mini-yr">2022</span></div>
+                <div class="mini-desc">Deep learning model for predicting RNA 5-hydroxymethylcytosine (5hmC) modification sites.</div>
+                <a class="mini-lk" href="https://github.com/Afrida-Rahman/DeepR5hmC" target="_blank">GitHub ↗</a>
+              </div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-ico">🎙️</div>
+              <div class="mini-body">
+                <div class="mini-top"><span class="mini-nm">Speech Recognition Model</span><span class="mini-yr">2021</span></div>
+                <div class="mini-desc">Real-time speech recognition system that interprets spoken commands and executes instructions accordingly.</div>
+                <a class="mini-lk" href="https://github.com/Afrida-Rahman/Speech-Recogniser-model" target="_blank">GitHub ↗</a>
+              </div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-ico">🐳</div>
+              <div class="mini-body">
+                <div class="mini-top"><span class="mini-nm">Dockerized CRUD API</span><span class="mini-yr">2020</span></div>
+                <div class="mini-desc">Containerized Flask REST API with MongoDB for data management, packaged with Docker &amp; Docker-Compose.</div>
+                <a class="mini-lk" href="https://github.com/Afrida-Rahman/Docker-Implementation" target="_blank">GitHub ↗</a>
+              </div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-ico">🕸️</div>
+              <div class="mini-body">
+                <div class="mini-top"><span class="mini-nm">Web Scraping Suite</span><span class="mini-yr">2020</span></div>
+                <div class="mini-desc">Flask-based review &amp; image scrapers persisting to MongoDB, deployed on Heroku.</div>
+                <a class="mini-lk" href="https://github.com/Afrida-Rahman/Data-Analysis-Implementation" target="_blank">GitHub ↗</a>
+              </div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-ico">🏥</div>
+              <div class="mini-body">
+                <div class="mini-top"><span class="mini-nm">Hospital Management System</span><span class="mini-yr">2019</span></div>
+                <div class="mini-desc">Laravel system integrating medical, financial, and administrative records of hospital operations.</div>
+                <a class="mini-lk" href="https://github.com/Afrida-Rahman/Laravel-Project-3-2" target="_blank">GitHub ↗</a>
+              </div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-ico">💡</div>
+              <div class="mini-body">
+                <div class="mini-top"><span class="mini-nm">Competitive Programming</span><span class="mini-yr">Ongoing</span></div>
+                <div class="mini-desc">Curated solutions to algorithmic problem sets from online judges, organized by topic.</div>
+                <a class="mini-lk" href="https://github.com/Afrida-Rahman/LeetCode-Problem_Solving" target="_blank">GitHub ↗</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SKILLS -->
+        <div class="sec-block reveal" id="skills">
+          <p class="sec-eyebrow">Technical Proficiency</p>
+          <h2 class="sec-title">Skills</h2>
+          <div class="skills-grid">
+            <div class="skill-card">
+              <div class="skill-card-title">🧠 Medical Imaging &amp; Neuro-Oncology</div>
+              <div class="skill-pills"><span class="skill-pill">PET/MRI Fusion</span><span class="skill-pill">Multimodal CNN</span><span class="skill-pill">Segmentation</span><span class="skill-pill">DICOM Pipelines</span></div>
+            </div>
+            <div class="skill-card">
+              <div class="skill-card-title">🔬 Bioinformatics</div>
+              <div class="skill-pills"><span class="skill-pill">Sequence Modeling</span><span class="skill-pill">PTM Prediction</span><span class="skill-pill">PseAAC</span><span class="skill-pill">Feature Optimization</span></div>
+            </div>
+            <div class="skill-card">
+              <div class="skill-card-title">⚙️ Deep Learning &amp; ML</div>
+              <div class="skill-pills"><span class="skill-pill">VAE Architectures</span><span class="skill-pill">Ensemble Methods</span><span class="skill-pill">Hybrid Loss Design</span><span class="skill-pill">Imbalanced Data</span></div>
+            </div>
+            <div class="skill-card">
+              <div class="skill-card-title">👁 Computer Vision &amp; Deployment</div>
+              <div class="skill-pills"><span class="skill-pill">Pose Estimation</span><span class="skill-pill">Real-Time Inference</span><span class="skill-pill">Mobile AI</span><span class="skill-pill">NLP</span></div>
+            </div>
+          </div>
+          <div class="tools-block">
+            <div class="tools-label">Languages &amp; Tools</div>
+            <div class="tool-tags">
+              <span class="ttag">Python</span><span class="ttag">C++</span><span class="ttag">MATLAB</span><span class="ttag">Kotlin</span>
+              <span class="ttag">TensorFlow</span><span class="ttag">Scikit-Learn</span><span class="ttag">OpenCV</span><span class="ttag">BERT / Word2Vec / GloVe</span>
+              <span class="ttag">3D Slicer</span><span class="ttag">MRtrix3</span><span class="ttag">DICOM</span>
+              <span class="ttag">Docker</span><span class="ttag">Kubernetes</span><span class="ttag">Git</span>
+              <span class="ttag">Django</span><span class="ttag">Flask</span><span class="ttag">SQL / MongoDB</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACADEMIC & PROFESSIONAL BACKGROUND -->
+        <div class="sec-block reveal" id="background">
+          <p class="sec-eyebrow">Where I've Studied &amp; Worked</p>
+          <h2 class="sec-title">Background</h2>
+          <div class="bg-cols">
+            <div>
+              <div class="bg-col-title"><span class="bg-ico">🎓</span>Education &amp; Scholarship</div>
+              <div class="bg-timeline">
+                <div class="bg-item">
+                  <div class="bg-period">2016 – 2021</div>
+                  <div class="bg-role">B.Sc. in Computer Science &amp; Engineering</div>
+                  <div class="bg-org">Rajshahi University of Engineering and Technology (RUET), Bangladesh</div>
+                  <div class="bg-desc">Thesis: <em>iML-LysPTM</em> — Identification of Multi-label Lysine PTM Sites with Feature Optimization and Data Imbalance Minimization.</div>
+                </div>
+                <div class="bg-item scholar-item">
+                  <div class="bg-period">Government of Bangladesh</div>
+                  <div class="scholar-card">
+                    <div class="bg-role">🏅 Merit-Based Education Scholarship</div>
+                    <div class="bg-desc">Awarded competitively at three consecutive national examination levels in recognition of sustained academic distinction.</div>
+                    <div class="scholar-levels">
+                      <span class="scholar-chip">Junior (Grade 8)</span>
+                      <span class="scholar-chip">Secondary (SSC)</span>
+                      <span class="scholar-chip">Higher Secondary (HSC)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="bg-col-title"><span class="bg-ico">💼</span>Professional Background</div>
+              <div class="bg-timeline">
+                <div class="bg-item">
+                  <div class="bg-period">Dec 2024 – Present</div>
+                  <div class="bg-role">Research Assistant</div>
+                  <div class="bg-org">Kundu Lab, University of Virginia, USA</div>
+                  <div class="bg-desc">Multimodal deep learning for brain tumor segmentation and progression classification (PET/MRI fusion).</div>
+                </div>
+                <div class="bg-item">
+                  <div class="bg-period">Feb 2021 – Feb 2023</div>
+                  <div class="bg-role">AI Engineer</div>
+                  <div class="bg-org">MyMedicalHUB International Ltd., Tampa, FL, USA</div>
+                  <div class="bg-desc">Built and deployed EMMA, a production AI physiotherapy coach for musculoskeletal rehabilitation on Android.</div>
+                </div>
+                <div class="bg-item">
+                  <div class="bg-period">Aug 2019 – Oct 2024</div>
+                  <div class="bg-role">ML Researcher</div>
+                  <div class="bg-org">Machine Learning Research Lab, RUET, Bangladesh</div>
+                  <div class="bg-desc">Protein PTM prediction research producing 6 publications across Nature, PLOS ONE, Gene, and IEEE/ACM TCBB.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- EXTRA-CURRICULAR ACTIVITIES -->
+        <div class="sec-block reveal" id="activities">
+          <p class="sec-eyebrow">Beyond Research</p>
+          <h2 class="sec-title">Extra-Curricular Activities</h2>
+          <div class="activity-grid">
+            <div class="act-card">
+              <div class="act-org">IEEE</div>
+              <div class="act-role">Student Member</div>
+              <div class="act-period">Dec 2019 – Present</div>
+              <div class="act-desc">Engaging with the global professional engineering community and building networks aligned with long-term research goals.</div>
+            </div>
+            <div class="act-card">
+              <div class="act-org">Innovation Society of RUET (ISR)</div>
+              <div class="act-role">General Member</div>
+              <div class="act-period">2018 – 2020</div>
+              <div class="act-desc">Collected and refined innovative ideas while maintaining relationships within a community of creative problem-solvers.</div>
+            </div>
+            <div class="act-card">
+              <div class="act-org">Hult Prize on Campus</div>
+              <div class="act-role">Competitor</div>
+              <div class="act-period">Dec 2018</div>
+              <div class="act-desc">Participated in the global student entrepreneurship competition, pitching original social-impact business ideas.</div>
+            </div>
+            <div class="act-card">
+              <div class="act-org">Bangladesh Betar (National Radio)</div>
+              <div class="act-role">Lead Singer</div>
+              <div class="act-period">2009 – 2014</div>
+              <div class="act-desc">Held a lead role across cultural broadcasts and performances on Bangladesh's national radio.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACHIEVEMENTS & CERTIFICATIONS -->
+        <div class="sec-block reveal" id="achievements">
+          <p class="sec-eyebrow">Recognition &amp; Learning</p>
+          <h2 class="sec-title">Achievements &amp; Certifications</h2>
+          <div class="ach-cols">
+            <div>
+              <div class="bg-col-title">Achievements</div>
+              <div class="ach-list">
+                <div class="ach-row"><div class="ach-dot"></div><div class="ach-text"><strong>Student Travel Award</strong> — World Molecular Imaging Congress (WMIC 2025), Alaska. Selected among top 8 abstracts.</div></div>
+                <div class="ach-row"><div class="ach-dot"></div><div class="ach-text"><strong>Best Team Award</strong> — MyMedicalHUB International, for innovating the EMMA smart healthcare application.</div></div>
+                <div class="ach-row"><div class="ach-dot"></div><div class="ach-text"><strong>Best Employee Award</strong> — MyMedicalHUB International, for developing a real-time algorithm tracking 600+ exercises.</div></div>
+                <div class="ach-row"><div class="ach-dot"></div><div class="ach-text"><strong>Certificate of Appreciation</strong> — IEEE TENSYMP 2020, for presenting "Prediction of Formylation Sites by Incorporating Sequence Coupling into General PseAAC."</div></div>
+                <div class="ach-row"><div class="ach-dot"></div><div class="ach-text">Government merit scholarships at the 8th grade, Secondary, and Higher Secondary examination levels.</div></div>
+              </div>
+            </div>
+            <div>
+              <div class="bg-col-title">Certifications</div>
+              <div class="ach-list">
+                <div class="ach-row"><div class="ach-dot"></div><div class="ach-text"><strong>Certificate of Presentation</strong> — World Molecular Imaging Congress (WMIC 2025), Anchorage, Alaska.</div></div>
+                <div class="ach-row"><div class="ach-dot"></div><div class="ach-text"><strong>Certificate of Presentation</strong> — Society of Nuclear Medicine and Molecular Imaging Annual Meeting (SNMMI 2026), Los Angeles, California.</div></div>
+                <div class="ach-row"><div class="ach-dot"></div><div class="ach-text"><strong>Programming for Everybody</strong> — Getting Started with Python, Coursera (University of Michigan).</div></div>
+                <div class="ach-row"><div class="ach-dot"></div><div class="ach-text"><strong>Python Data Structures</strong> — Coursera (University of Michigan).</div></div>
+                <div class="ach-row"><div class="ach-dot"></div><div class="ach-text"><strong>Using Databases with Python</strong> — Coursera (University of Michigan).</div></div>
+                <div class="ach-row"><div class="ach-dot"></div><div class="ach-text"><strong>Using Python to Access Web Data</strong> — Coursera (University of Michigan).</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- REFERENCES -->
+        <div class="sec-block reveal" id="references">
+          <p class="sec-eyebrow">Academic References</p>
+          <h2 class="sec-title">References</h2>
+          <div class="ref-grid">
+            <div class="ref-card">
+              <div class="ref-name">Dr. Bijoy Kundu</div>
+              <div class="ref-role">Associate Professor, Radiology &amp; Medical Imaging</div>
+              <div class="ref-org">University of Virginia, USA</div>
+              <a class="ref-contact" href="mailto:bkk5a@virginia.edu">bkk5a@virginia.edu</a>
+            </div>
+            <div class="ref-card">
+              <div class="ref-name">Dr. Md. Al Mehedi Hasan</div>
+              <div class="ref-role">Professor, Dept. of CSE, RUET</div>
+              <div class="ref-org">Rajshahi University of Engineering and Technology, Bangladesh</div>
+              <a class="ref-contact" href="mailto:mehedi_ru@yahoo.com">mehedi_ru@yahoo.com</a>
+            </div>
+            <div class="ref-card">
+              <div class="ref-name">Prof. Shamim Ahmad</div>
+              <div class="ref-role">Professor, Dept. of CSE</div>
+              <div class="ref-org">University of Rajshahi, Bangladesh</div>
+              <a class="ref-contact" href="mailto:shamim_cst@ru.ac.bd">shamim_cst@ru.ac.bd</a>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ CONTACT ══════════ -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <h2 class="ct-heading">Let's Talk</h2>
+        <p class="ct-sub">I am actively seeking PhD positions in AI, Medical Imaging, and Computational Biology. If you are a professor with an opening or a researcher open to collaboration, I would be glad to hear from you.</p>
+        <a class="ct-email" href="mailto:nyp9tp@virginia.edu">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+          nyp9tp@virginia.edu
+        </a>
+        <a class="ct-email" href="mailto:afrida.r.samma@gmail.com">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+          afrida.r.samma@gmail.com
+        </a>
+      </div>
+      <div class="ct-list">
+        <div class="ct-row"><span class="ct-lbl">Phone</span><span class="ct-val">+1 (434) 310-1159</span></div>
+        <div class="ct-row"><span class="ct-lbl">Location</span><span class="ct-val">Charlottesville, VA 22903</span></div>
+        <div class="ct-row"><span class="ct-lbl">LinkedIn</span><span class="ct-val"><a href="http://www.linkedin.com/in/afridarahman" target="_blank">afridarahman</a></span></div>
+        <div class="ct-row"><span class="ct-lbl">Scholar</span><span class="ct-val"><a href="https://scholar.google.com/citations?user=PLN8BW8AAAAJ&hl=en" target="_blank">Google Scholar</a></span></div>
+        <div class="ct-row"><span class="ct-lbl">ResearchGate</span><span class="ct-val"><a href="http://www.researchgate.net/profile/Afrida_Rahman2" target="_blank">Afrida_Rahman2</a></span></div>
+        <div class="ct-row"><span class="ct-lbl">GitHub</span><span class="ct-val"><a href="https://github.com/Afrida-Rahman" target="_blank">Afrida-Rahman</a></span></div>
+        <div class="ct-row"><span class="ct-lbl">ORCID</span><span class="ct-val"><a href="https://orcid.org/0000-0002-6724-0338" target="_blank">0000-0002-6724-0338</a></span></div>
+        <div class="ct-row"><span class="ct-lbl">Affiliation</span><span class="ct-val">University of Virginia</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2025 Afrida Rahman · University of Virginia</footer>
+
+<script>
+  // Reveal on scroll
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('in'), i * 50);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Pub filter
+  const pfBtns = document.querySelectorAll('.pfbtn');
+  function filterPubs(type, btn) {
+    pfBtns.forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    document.querySelectorAll('.pub-row').forEach(r => {
+      r.style.display = (type === 'all' || r.dataset.type === type) ? '' : 'none';
+    });
+  }
+
+  // Nav active
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    document.querySelectorAll('[id]').forEach(s => {
+      if (window.scrollY >= s.offsetTop - 70) cur = s.id;
+    });
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.classList.toggle('act', a.getAttribute('href') === '#' + cur);
+    });
+  }, { passive: true });
+</script>
+</body>
+</html>
